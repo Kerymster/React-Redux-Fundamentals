@@ -33,7 +33,7 @@ function App() {
     <div className="App">
       <Container fluid="md" className="mt-5">
         <SearchBar search={getInputData} />
-        <TableRes results={fakeApiResults} />
+        <TableRes results={fakeApiResults} query={query} />
         <Results results={fakeApiResults} query={query} />
       </Container>
     </div>
