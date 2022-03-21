@@ -8,6 +8,7 @@ import Results from "./components/Results/Results";
 
 function App() {
   const [fakeApiResults, setFakeApiResults] = useState([]);
+  const [query, setQuery] = useState("");
 
   const getUsersfromApi = async () => {
     await axios
@@ -19,6 +20,10 @@ function App() {
       .catch((err) => console.log("Error", err));
   };
 
+  const getInputData = (data) => {
+    setQuery(data);
+  };
+
   useEffect(() => {
     getUsersfromApi();
   }, []);
@@ -26,8 +31,8 @@ function App() {
   return (
     <div className="App">
       <Container fluid="md" className="mt-5">
-        <SearchBar />
-        <Results results={fakeApiResults} />
+        <SearchBar search={getInputData} />
+        <Results results={fakeApiResults} query={query} />
       </Container>
     </div>
   );
