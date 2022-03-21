@@ -5,6 +5,7 @@ import axios from "axios";
 import "./App.css";
 import SearchBar from "./components/SearchBar/SearchBar";
 import Results from "./components/Results/Results";
+import TableRes from "./components/TableRes/TableRes";
 
 function App() {
   const [fakeApiResults, setFakeApiResults] = useState([]);
@@ -32,6 +33,7 @@ function App() {
     <div className="App">
       <Container fluid="md" className="mt-5">
         <SearchBar search={getInputData} />
+        <TableRes results={fakeApiResults} />
         <Results results={fakeApiResults} query={query} />
       </Container>
     </div>
