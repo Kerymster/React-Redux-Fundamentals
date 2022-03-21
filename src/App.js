@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import "bootswatch/dist/lux/bootstrap.min.css";
+import React, { useState, useEffect } from "react";
+import { Container } from "react-bootstrap";
+import axios from "axios";
+import "./App.css";
+import SearchBar from "./components/SearchBar/SearchBar";
+import Results from "./components/Results/Results";
+import TableRes from "./components/TableRes/TableRes";
 
 function App() {
+  const [fakeApiResults, setFakeApiResults] = useState([]);
+  const [query, setQuery] = useState("");
+
+  const getUsersfromApi = async () => {
+    await axios
+      .get("https://randomuser.me/api/?results=50")
+      .then((res) => {
+        console.log(res.data.results);
+        setFakeApiResults(res.data.results);
+      })
+      .catch((err) => console.log("Error", err));
+  };
+
+  const getInputData = (data) => {
+    setQuery(data);
+  };
+
+  useEffect(() => {
+    getUsersfromApi();
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container fluid="md" className="mt-5">
+        <SearchBar search={getInputData} />
+        <TableRes results={fakeApiResults} query={query} />
+        <Results results={fakeApiResults} query={query} />
+      </Container>
     </div>
   );
 }
