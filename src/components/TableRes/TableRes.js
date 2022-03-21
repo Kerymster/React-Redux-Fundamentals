@@ -2,9 +2,10 @@ import React from "react";
 import { Table } from "react-bootstrap";
 
 const TableRes = ({ results, query }) => {
-  console.log(results);
   const users = results.map((user) => user.name);
-  console.log(users);
+  // const keys = Object.keys(users[0]);
+  const keys = ["first", "last", "title"];
+
   return (
     <Table striped bordered hover size="sm">
       <thead>
@@ -18,7 +19,9 @@ const TableRes = ({ results, query }) => {
       <tbody>
         {query &&
           users
-            .filter((user) => user.first.toLowerCase().includes(query))
+            .filter((user) =>
+              keys.some((key) => user[key].toLowerCase().includes(query))
+            )
             .map((item, index) => (
               <tr key={index}>
                 <td>{index}</td>
