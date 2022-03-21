@@ -11,7 +11,7 @@ const TableRes = ({ results }) => {
         <tr>
           <th>#</th>
           <th>First Name</th>
-          <th>Last Name</th>
+          <th>Last Nam</th>
           <th>Title</th>
         </tr>
       </thead>
